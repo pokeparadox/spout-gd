@@ -34,7 +34,7 @@ func hit_pixel(other_rect : Rect2) -> void:
 				pixels.erase(key)
 
 func _process(_delta: float) -> void:
-	if get_parent().in_play_area(global_position + rectangle.size):
+	if get_parent().in_play_area(global_position + rectangle.size) or get_parent().in_play_area(global_position):
 		#run through the dictionary and draw the pixels
 		var half_vec := Vector2(0.5,0.5)
 		var scale_dims = (rectangle.size / State.zoom) + half_vec
@@ -44,8 +44,9 @@ func _process(_delta: float) -> void:
 				var key : Vector2i = Vector2i(x, y)
 				var pos : Vector2i = Vector2i(scale_pos) + key
 				if get_parent().in_play_area((scale_pos + half_vec) * State.zoom):
-					if pixels.has(key):
+					if pixels.has(key) and get_parent().in_play_area(pos):
 						Buffers.set_pixel(pos, 2)
+
 
 # Deal with block entering and exiting the play area and being destroyed
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
