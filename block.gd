@@ -43,9 +43,8 @@ func _process(_delta: float) -> void:
 			for x in range(scale_dims.x):
 				var key : Vector2i = Vector2i(x, y)
 				var pos : Vector2i = Vector2i(scale_pos) + key
-				if get_parent().in_play_area((scale_pos + half_vec) * State.zoom):
-					if pixels.has(key) and get_parent().in_play_area(pos):
-						Buffers.set_pixel(pos, 2)
+				if pixels.has(key) and get_parent().in_play_area(pos * State.zoom):
+					Buffers.set_pixel(pos, 2)
 
 
 # Deal with block entering and exiting the play area and being destroyed
