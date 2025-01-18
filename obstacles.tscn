@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ri1ltbwonjy"]
+
+[ext_resource type="Script" path="res://obstacles.gd" id="1_2vq7a"]
+[ext_resource type="Script" path="res://block_container.gd" id="2_2voir"]
+[ext_resource type="Script" path="res://Shapes/Square.gd" id="2_qyxvq"]
+
+[node name="Obstacles" type="Node2D"]
+script = ExtResource("1_2vq7a")
+
+[node name="VisibleStart" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 16)
+
+[node name="VisibleEnd" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(992, 622)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -92)
+
+[node name="BlockContainer" type="Node2D" parent="."]
+script = ExtResource("2_2voir")
+
+[node name="DebugSquare" type="Node2D" parent="BlockContainer"]
+position = Vector2(513, 190)
+script = ExtResource("2_qyxvq")
+is_filled = false
+line_width = 2.0
+length = 1021.0
+colour = Color(1, 0, 0, 1)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

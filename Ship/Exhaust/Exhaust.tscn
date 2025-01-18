@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpvlq7tmfapy7"]
+
+[ext_resource type="PackedScene" uid="uid://n17kf3hh6yjy" path="res://Shapes/Square.tscn" id="3_ny20v"]
+[ext_resource type="PackedScene" uid="uid://c45h6fmjbnb8y" path="res://Utils/CollisionParticles/CpEmitter.tscn" id="3_w2uk7"]
+[ext_resource type="Script" path="res://Ship/Exhaust/Exhaust.gd" id="4"]
+
+[node name="Exhaust" type="Node2D"]
+script = ExtResource("4")
+
+[node name="CpEmitter" parent="." instance=ExtResource("3_w2uk7")]
+
+[node name="Square" parent="." instance=ExtResource("3_ny20v")]
+visible = false
+colour = Color(1, 0, 0, 1)

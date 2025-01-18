@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://blpkyikujm765"]
+
+[ext_resource type="Script" path="res://ship.gd" id="1_hvp8c"]
+[ext_resource type="PackedScene" uid="uid://n17kf3hh6yjy" path="res://Shapes/Square.tscn" id="4_rieys"]
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_hvp8c")
+
+[node name="Black" parent="." instance=ExtResource("4_rieys")]
+position = Vector2(0, 1)
+length = 24.0
+colour = Color(0, 0, 0, 1)
+
+[node name="White" parent="." instance=ExtResource("4_rieys")]
+position = Vector2(0, 1)
+length = 8.0

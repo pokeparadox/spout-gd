@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://vhw6d4gkgxds"]
+
+[sub_resource type="GDScript" id="GDScript_0fmdc"]
+script/source = "@tool
+extends Polygon2D
+
+@export
+var size: Vector2 = Vector2(100,100):
+	set(val):
+		size = val
+		render_poly()
+
+func _enter_tree():
+	render_poly()
+
+func render_poly():
+	polygon = [
+		Vector2(0, 0) * size,
+		Vector2(1, 0) * size,
+		Vector2(1, 1) * size,
+		Vector2(0, 1) * size
+	]
+"
+
+[node name="Walls" type="Node2D"]
+
+[node name="Top" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 16, 0, 16)
+script = SubResource("GDScript_0fmdc")
+size = Vector2(1024, 16)
+
+[node name="Left" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 630, 0, 630)
+script = SubResource("GDScript_0fmdc")
+size = Vector2(32, 630)
+
+[node name="Right" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+offset = Vector2(992, 0)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 630, 0, 630)
+script = SubResource("GDScript_0fmdc")
+size = Vector2(32, 630)
+
+[node name="Bottom" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+offset = Vector2(0, 622)
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 16, 0, 16)
+script = SubResource("GDScript_0fmdc")
+size = Vector2(1024, 16)

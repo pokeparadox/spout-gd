@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://o06db2l8bagp"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_s5sed"]
+[ext_resource type="Script" path="res://screen.gd" id="2_b5eky"]
+[ext_resource type="PackedScene" uid="uid://blpkyikujm765" path="res://ship.tscn" id="3_01byw"]
+[ext_resource type="PackedScene" uid="uid://6ri1ltbwonjy" path="res://obstacles.tscn" id="3_nngd0"]
+[ext_resource type="PackedScene" uid="uid://vhw6d4gkgxds" path="res://walls.tscn" id="4_p05x5"]
+[ext_resource type="PackedScene" uid="uid://bbwjew4vijqvp" path="res://status.tscn" id="5_l6h8b"]
+[ext_resource type="PackedScene" uid="uid://cpvlq7tmfapy7" path="res://Ship/Exhaust/Exhaust.tscn" id="6_loo7y"]
+
+[node name="Spout" type="Node2D"]
+script = ExtResource("1_s5sed")
+
+[node name="Screen" type="Node2D" parent="."]
+script = ExtResource("2_b5eky")
+
+[node name="Obstacles" parent="." instance=ExtResource("3_nngd0")]
+
+[node name="Exhaust" parent="." instance=ExtResource("6_loo7y")]
+
+[node name="Ship" parent="." instance=ExtResource("3_01byw")]
+
+[node name="Walls" parent="." instance=ExtResource("4_p05x5")]
+
+[node name="Status" parent="." instance=ExtResource("5_l6h8b")]
+
+[connection signal="died" from="Ship" to="." method="_on_ship_died"]
+[connection signal="level_up" from="Ship" to="." method="_on_ship_level_up"]
+[connection signal="thrust_angle_change" from="Ship" to="." method="_on_ship_thrust_angle_change"]
+[connection signal="thrust_change" from="Ship" to="." method="_on_ship_thrust_change"]
+[connection signal="out_of_time" from="Status" to="." method="_on_status_out_of_time"]

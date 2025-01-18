@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://8icnvcssf6d6"]
+
+[ext_resource type="Script" path="res://Utils/CollisionParticles/CpParticle.gd" id="1_io2o6"]
+[ext_resource type="PackedScene" uid="uid://n17kf3hh6yjy" path="res://Shapes/Square.tscn" id="2_54awv"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "ParticleFade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Square:colour")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 2.03333, 2.76667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.839216, 0.901961, 0.305882, 1), Color(0.941176, 0.0705882, 0.0705882, 1), Color(0.109804, 0.0117647, 0.0117647, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:colour_byte")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.03333, 2.76667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Square:Colour")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.996078, 0.843137, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:colour_byte")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vipja"]
+_data = {
+"ParticleFade": SubResource("2"),
+"RESET": SubResource("3")
+}
+
+[node name="CpParticle" type="Node2D"]
+script = ExtResource("1_io2o6")
+
+[node name="Square" parent="." instance=ExtResource("2_54awv")]
+position = Vector2(4, 4)
+length = 8.0
+colour = Color(0.839216, 0.901961, 0.305882, 1)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vipja")
+}
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
