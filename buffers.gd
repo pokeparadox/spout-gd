@@ -36,32 +36,6 @@ func memsetOffset(buff : PackedByteArray, offset: int, val : int, size : int) ->
 func get_particle_key(p : Particle) -> Vector2i:
 	return Vector2i(p.position/State.zoom + Vector2(0.5,0.5))
 
-func set_particle(p : Particle) -> void:
-	var key : Vector2i
-	if p.last_float_pos != Vector2.INF:
-		key = p.last_float_pos
-		var new_key := get_particle_key(p)
-		if new_key != key:
-			particle_lookup.erase(key)
-			p.last_buff_pos = new_key
-			particle_lookup[new_key] = p
-	else:
-		key = get_particle_key(p)
-	if particle_lookup.has(key):
-		var existing : Particle = particle_lookup[key]
-		if p != existing:
-			if existing.colour_byte > 5:
-				existing.hit()
-
-func kill_particle(p : Particle) -> void:
-	var key : Vector2i
-	if p.last_float_pos != Vector2.INF:
-		key = p.last_float_pos
-	else:
-		key = get_particle_key(p)
-	if particle_lookup.has(key):
-		particle_lookup.erase(key)
-
 func set_pixel(pos: Vector2i, palletteVal : int) -> void:
 	var index : int = (pos.y * LcdWidth) + pos.x
 	if display_buff.size() > index and index >= 0 and display_buff[index] != palletteVal:
@@ -73,4 +47,3 @@ func _init() -> void:
 
 #var vBuff : PackedByteArray
 var display_buff : PackedByteArray
-var particle_lookup = {}

@@ -54,10 +54,8 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	last_float_pos = position
 	position = Vector2i(position/State.zoom + (Vector2(0.5,0.5))) * State.zoom
-	Buffers.set_particle(self)
 
 func hit():
-	Buffers.kill_particle(self)
 	visible = false
 	emit_signal("particle_dead")
 	queue_free()

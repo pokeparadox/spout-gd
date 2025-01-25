@@ -9,6 +9,7 @@ extends Node2D
 @export var delay : float = 0.032
 @export var resistance : float = 0.99
 
+const ParticlesGroupName : String = "Particles"
 
 var spawn_position : Vector2 = Vector2.ZERO
 var num_particles : int = 0
@@ -40,7 +41,7 @@ func spawn_particle():
 		p.resistance = resistance
 		var jitter : float = angle_rad + randf_range(1 - spread, spread) *0.03
 		p.direction_vec = Vector2(-sin(jitter) * speed, cos(jitter ) * speed)
-
 		p.connect("particle_dead", on_particle_dead)
+		p.add_to_group(ParticlesGroupName)
 		add_child(p)
 		num_particles += 1

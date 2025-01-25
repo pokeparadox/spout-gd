@@ -20,7 +20,7 @@ func set_dimensions(dims : Vector2) -> void:
 			pixels[Vector2i(x, y)] = 2
 
 # Hit the scaled LCD pixel
-func hit_pixel(other_rect : Rect2) -> void:
+func hit_pixel(other_rect : Rect2) -> bool:
 	if get_parent().in_play_area(global_position):
 		rectangle.position = global_position
 		if rectangle.encloses(other_rect):
@@ -32,6 +32,8 @@ func hit_pixel(other_rect : Rect2) -> void:
 			var key : Vector2i = Vector2i(scaled_hit_pos + Vector2(0.5, 0.5))
 			if pixels.has(key):
 				pixels.erase(key)
+				return true
+	return false
 
 func _process(_delta: float) -> void:
 	if get_parent().in_play_area(global_position + rectangle.size) or get_parent().in_play_area(global_position):
