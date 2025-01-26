@@ -134,7 +134,6 @@ func _on_status_out_of_time() -> void:
 	Fonts.pceFontPrintF("PRESS START")
 	Fonts.pceFontSetType(0)
 
-
 func _on_ship_level_up() -> void:
 	if State.increase_height():
 		$Status.add_bonus_time()
@@ -183,6 +182,7 @@ func _on_ship_level_up() -> void:
 
 func _physics_process(delta: float) -> void:
 	$Exhaust/CpEmitter.spawn_position = $Ship.global_position
+	$Obstacles.is_moving = $Ship.is_rising
 
 func _on_ship_thrust_angle_change(angle_rad: float) -> void:
 	$Exhaust.set_angle(angle_rad)

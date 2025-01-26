@@ -5,6 +5,7 @@ signal level_up
 signal thrust_change(thrusting)
 signal thrust_angle_change(angle_rad)
 
+var is_rising : bool = false
 var active : bool = true
 var mPos : Vector2
 
@@ -82,9 +83,11 @@ func _physics_process(delta: float) -> void:
 			mPos.y = 77 * zoom
 			State.gameover = true
 
-		if mPos.y < 40 * zoom:
+		is_rising = mPos.y < 40 * zoom
+		if is_rising:
 			mPos.y = 40 * zoom
 			emit_signal("level_up")
+
 	#if State.gameover == false and (State.gamePhase == State.States.Game):
 	direction = -direction
 	var scaledPos := mPos / State.zoom
@@ -117,6 +120,7 @@ func _physics_process(delta: float) -> void:
 	gPhase = (gPhase + 1) % 9
 
 	if State.gameover:
+		is_rising = false
 		emit_signal("died")
 
 
